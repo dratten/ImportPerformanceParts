@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::group(["prefix"=> "payment"], function(){
+    Route::get("index", "PaymentsController@index");
+});
