@@ -37,7 +37,6 @@
 
         .tabs .tab a:hover {
             color: #00e676;
-    
             /*Custom Color On Hover*/
         }
 
@@ -45,7 +44,6 @@
             color: #00e676;
             /*Custom Text Color While Active*/
             background-color: #00c85336;
-
             /*Custom Background Color While Active*/
         }
 
@@ -216,21 +214,9 @@
     let tabShown = (obj) => {
         switch (obj.id) {
             case 'stripe':
-                $('.tabs .tab a').css({'color': '#651fff'})
-                $('.tabs .tab a:hover').css({'color': '#651fff'})
-
-                $('.tabs .tab a:focus.active').css({'color': '#651fff', 'background-color': '#661fff33'})
-                $('.tabs .tab a:hover, .tabs .tab a.active').css({'color': '#651fff'})
-                $('.tabs .indicator').css({'background-color': '#651fff'})
+                console.log('hello')
                 break;
             case 'mpesa':
-
-            $('.tabs .tab a').css({'color': '#00e676'})
-                $('.tabs .tab a:hover').css({'color': '#00e676'})
-
-                $('.tabs .tab a:focus.active').css({'color': '#00e676', 'background-color': '#00c85336'})
-                $('.tabs .tab a:hover, .tabs .tab a.active').css({'color': '#00e676'})
-                $('.tabs .indicator').css({'background-color': '#00e676'})
                 break;
         }
     }
