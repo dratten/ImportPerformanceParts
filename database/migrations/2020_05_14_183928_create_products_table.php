@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->string('product_specifications');
             $table->double('product_price');
             $table->string('product_category');
-            $table->int('category_id');
+            $table->bigInteger('category_id');
 
         });
     }

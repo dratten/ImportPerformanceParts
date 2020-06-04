@@ -16,15 +16,15 @@ class CreatePaymentsTable extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->increments('payment_id');
             $table->double('product_price');
-            $table->int('product_id');
-            $table->int('customer_id');
+            $table->unsignedBigInteger('customer_id');
+            $table->foreign('customer_id')->references('user_id')->on('users');
             $table->string('customer_name');
             $table->double('total_price');
-            $table->int('product_id');
+            $table->unsignedBigInteger('product_id');
             $table->boolean('payment_status');
             $table->string('product_name');
-            $table->int('category_id');
-            $table->int('company_id');
+            $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('company_id');
 
             $table->timestamps();
         });
