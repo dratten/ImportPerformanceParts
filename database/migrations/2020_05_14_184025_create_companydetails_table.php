@@ -14,7 +14,7 @@ class CreateCompanydetailsTable extends Migration
     public function up()
     {
         Schema::create('companydetails', function (Blueprint $table) {
-            $table->increments('company_id');
+            $table->bigIncrements('company_id');
             $table->string('company_name');
             $table->string('main_address');
             $table->string('second_address');
