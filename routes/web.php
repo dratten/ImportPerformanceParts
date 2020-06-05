@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +21,6 @@ Route::get('/', function () {
 Route::group(["prefix"=> "payment"], function(){
     Route::get("index", "PaymentsController@index");
 });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
