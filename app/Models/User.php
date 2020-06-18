@@ -7,6 +7,8 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use App\Payment;
+
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 

@@ -16,11 +16,21 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('product_id');
             $table->string('product_name');
-            $table->string('product_specifications');
-            $table->double('product_price');
-            $table->string('product_category');
-            $table->bigInteger('category_id');
+            $table->text('product_specifications');
+            $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('car_id');
+            $table->float('product_price');
+            $table->integer('product_rating');
+            $table->text('product_image');
 
+            //category_id foreign key
+            $table->foreign('category_id')->references('category_id')->
+            on('categories')->onDelete('cascade');
+
+            //car_id foreign key
+            $table->foreign('car_id')->references('car_id')->
+            on('car_models')->onDelete('cascade');
+            
         });
     }
 
