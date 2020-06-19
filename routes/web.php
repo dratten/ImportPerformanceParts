@@ -15,20 +15,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('resources');
+    return view('home');
 });
 
 Route::group(["prefix"=> "payment"], function(){
     Route::get("index", "PaymentsController@index");
 });
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
 
