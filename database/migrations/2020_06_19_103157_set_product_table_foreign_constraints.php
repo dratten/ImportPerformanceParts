@@ -28,7 +28,8 @@ class SetProductTableForeignConstraints extends Migration
     public function down()
     {
         Schema::table('products', function (Blueprint $table) {
-            
+            $table->dropForeign(['category_id']);
+            $table->dropForeign(['car_id']);
         });
     }
 }
