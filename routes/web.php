@@ -24,3 +24,4 @@ Route::group(["prefix"=> "payment"], function(){
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::post('stripe', 'PaymentsController@payWithCard')->name('stripe.pay');
