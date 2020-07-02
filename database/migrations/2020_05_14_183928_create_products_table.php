@@ -28,6 +28,7 @@ class CreateProductsTable extends Migration
 
             //car_id foreign key
             $table->foreign('car_id')->references('car_id')->on('car_models')->onDelete('cascade');
+            
         });
     }
 
