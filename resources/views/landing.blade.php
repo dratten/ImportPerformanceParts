@@ -68,7 +68,7 @@
             <div class="product-image-wrapper">
               <div class="single-products">
                 <div class="productinfo text-center">
-                  <img src="{{ $item->product_image }}" alt="Image" height="120" width="100"/>
+                  <img src="images/products/{{ $item->product_image }}.jpg" alt="Image" height="120" width="100"/>
                   <h2>Kshs.{{ $item->product_price }}</h2>
                   <p>{{ $item->product_name }}</p>
                   <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
