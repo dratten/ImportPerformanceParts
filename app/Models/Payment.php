@@ -8,6 +8,10 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use App\Product;
+use App\Category;
+use App\User;
+use App\Companydetail;
 
 /**
  * Class Payment
@@ -55,7 +59,7 @@ class Payment extends Model
 
 	public function category()
 	{
-		return $this->belongsTo(Category::class);
+		return $this->belongsTo(Category::class, 'category_id');
 	}
 
 	public function companydetail()
@@ -66,5 +70,9 @@ class Payment extends Model
 	public function user()
 	{
 		return $this->belongsTo(User::class, 'customer_id');
+	}
+
+	public function product(){
+		return $this->belongsTo(Product::class, 'product_id');
 	}
 }
