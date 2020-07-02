@@ -28,9 +28,9 @@ class SetPaymentsTableForeignConstraints extends Migration
      */
     public function down()
     {
-        // $table->dropForeign(['product_id']);
-        // $table->dropForeign(['customer_id']);
-        // $table->dropForeign(['category_id']);
-        // $table->dropForeign(['company_id']);
+        $table->dropForeign(['product_id']);
+        $table->dropForeign(['customer_id']);
+        $table->dropForeign(['category_id']);
+        $table->dropForeign(['company_id']);
     }
 }
