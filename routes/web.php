@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+// Route::get('/', function () {
+    // return view('home', "HomeControler@index");
+// });
 
 Route::group(["prefix"=> "payment"], function(){
     Route::get("index", "PaymentsController@index");
@@ -24,4 +24,4 @@ Route::group(["prefix"=> "payment"], function(){
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index');

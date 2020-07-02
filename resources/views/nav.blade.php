@@ -114,5 +114,4 @@
             </div>
         </div>
     </div>
-    <!--/header-bottom-->
 </header>

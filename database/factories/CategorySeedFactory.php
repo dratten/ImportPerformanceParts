@@ -8,6 +8,6 @@ use Faker\Generator as Faker;
 
 $factory->define(Category::class, function (Faker $faker) {
     return [
-        'category_name'=> $faker->name(10)
+        'category_name'=> $faker->word(5)
     ];
 });
