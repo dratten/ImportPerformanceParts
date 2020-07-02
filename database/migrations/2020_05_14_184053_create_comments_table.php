@@ -17,8 +17,6 @@ class CreateCommentsTable extends Migration
             $table->increments('comment_id');
             $table->bigInteger('product_id');
             $table->bigInteger('customer_id');
-            
-
             $table->timestamps();
         });
     }
