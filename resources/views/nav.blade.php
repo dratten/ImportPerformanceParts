@@ -58,7 +58,7 @@
             <div class="row">
                 <div class="col-sm-4">
                     <div class="logo pull-left">
-                        <a href="index.html"
+                        <a href="/"
                             ><img src="images/home/logo.png" alt=""
                         /></a>
                     </div>
@@ -119,7 +119,7 @@
                     <div class="mainmenu pull-left">
                         <ul class="nav navbar-nav collapse navbar-collapse">
                             <li>
-                                <a href="index.html" class="active">Home</a>
+                                <a href="/" class="active">Home</a>
                             </li>
                         </ul>
                     </div>
