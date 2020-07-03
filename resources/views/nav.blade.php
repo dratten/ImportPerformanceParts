@@ -16,6 +16,12 @@
         {{Session::get('added')}}
     </div>
     @endif
+
+    @if (Session::has('info'))
+    <div id="error-message" style="width: 100%; padding: 5px; height: 30px; background-color: #00B4DB; color: white; text-align:center; display: flex; justify-content:center">
+        {{Session::get('info')}}
+    </div>
+    @endif
     
     <div class="header_top">
         <!--header_top--> 
@@ -68,7 +74,9 @@
                         <ul class="nav navbar-nav">
                             <li>
                                 <a href="#"
-                                    ><i class="fa fa-user"></i> Account</a
+                                    ><i class="fa fa-user"></i>
+                                   {{Auth::user()->email ?? 'Account'}}
+                                    </a
                                 >
                             </li>
                             <li>
@@ -77,7 +85,7 @@
                                 >
                             </li>
                             <li>
-                                <a href=""
+                                <a href="{{url('/payment/checkout')}}"
                                     ><i class="fa fa-crosshairs"></i>
                                     Checkout</a
                                 >
@@ -87,9 +95,17 @@
                                     ><i class="fa fa-shopping-cart"></i> Cart</a
                                 >
                             </li>
-                            <li>
-                                <a href=""><i class="fa fa-lock"></i> Login</a>
-                            </li>
+                          @if (Auth::user())
+                          <li>
+                            <form   style="margin-top: 10px;" id="logout-form" action="{{url('/logout')}}" method="post">
+                                @csrf
+                                <a  href="javascript:$('#logout-form').submit()"><i class="fa fa-sign-out"></i> Logout</a></form>
+                        </li> 
+                          @else
+                          <li>
+                            <a href="{{url('/login')}}"><i class="fa fa-lock"></i> Login</a>
+                        </li>
+                          @endif
                         </ul>
                     </div>
                 </div>

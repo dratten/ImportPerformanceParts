@@ -18,6 +18,14 @@
             justify-content: space-between;
         }
 
+        .datepicker-date-display{
+           background-color:  #651fff !important;
+        }
+
+        .datepicker-cancel, .datepicker-clear, .datepicker-today, .datepicker-done{
+           color:  #651fff !important;
+        }
+
         .checkout-options {
             position: fixed;
             margin-left: 30px;
@@ -136,12 +144,6 @@
 </div>
 @endif
 
-
-@if (Session::has('ok'))
-<div id="error-message" style="width: 100%; padding: 5px; height: 30px; background-color: #1D976C; color: white; text-align:center; display: flex; justify-content:center">
-    {{Session::get('ok')}}
-</div>
-@endif
     <div id="header" class="header">
         <div class="valign-wrapper">
             <i style="cursor: pointer" id="back" class="material-icons">keyboard_arrow_left</i>

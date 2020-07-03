@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use Stripe\Charge;
 use Stripe\Stripe;
 use Illuminate\Http\Request;
+use Gathuku\Mpesa\Facades\Mpesa;
 use Illuminate\Support\Facades\Log;
 use SmoDav\Mpesa\Laravel\Facades\STK;
 use Illuminate\Support\Facades\Session;
@@ -17,7 +18,10 @@ class PaymentsController extends Controller
     //
     public function index()
     {
-        return view('payment/payment');
+        if (session()->exists('cart'))
+            return view('payment/payment');
+        else
+            return redirect('/home');
     }
 
     public function payWithMpesa(Request $request)
@@ -27,12 +31,10 @@ class PaymentsController extends Controller
         ]);
 
         if (!$validator->fails()) {
-            $response = STK::request(1)
-                ->from($request['number'])
-                ->usingReference('Import Performance Parts', 'Parts payment')
-                ->push();
+            $response = Mpesa::simulateC2B(1, $request->get('number'), "Import Performance Parts");
+            Log::info($response);
             if ($response) {
-                return redirect()->back()->with('ok', 'The payment request was successfully received');
+                return redirect('/home')->with('info', 'The payment request was successfully received');
             } else {
                 return redirect()->back()
                     ->withErrors(['details' => 'Unable to process payment for now please try again later']);
@@ -70,8 +72,6 @@ class PaymentsController extends Controller
                     ));
             } else {
 
-
-
                 session()->push('cart',  array(
                     'image' => $request['image'],
                     'name' => $request['name'],
@@ -84,15 +84,19 @@ class PaymentsController extends Controller
 
     public function checkout()
     {
-        $total = 0;
-        foreach ((array) Session::get('cart') as $key => $value) {
-            $total += $value['price'];
-        }
+        if (session()->exists('cart')) {
+            $total = 0;
+            foreach ((array) Session::get('cart') as $key => $value) {
+                $total += $value['price'];
+            }
 
-        Log::info('Logging total');
-        Log::info($total);
-        return redirect('/payment/index')->with('cart', Session::get('cart'))
-            ->with('total', $total);
+            Log::info('Logging total');
+            Log::info($total);
+            return redirect('/payment/index')->with('cart', Session::get('cart'))
+                ->with('total', $total);
+        } else {
+            return redirect()->back()->with('info', 'Your cart is empty please add items to the cart');
+        }
     }
 
     public function payWithCard(Request $request)
@@ -105,6 +109,6 @@ class PaymentsController extends Controller
             "description" => "Test payment"
         ]);
 
-        return redirect()->back()->with('ok', 'The payment request was successfully received');
+        return redirect('/home')->with('info', 'The payment was successfully received');
     }
 }
