@@ -50,6 +50,12 @@
                             <li>
                                 <a href="#"><i class="fa fa-facebook"></i></a>
                             </li>
+                            <li>
+                                <a href="#"><i class="fa fa-instagram"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-youtube" aria-hidden="true"></i></i></a>
+                            </li>
                         </ul>
                     </div>
                 </div>
