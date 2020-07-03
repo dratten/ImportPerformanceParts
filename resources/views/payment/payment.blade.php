@@ -126,7 +126,22 @@
 </head>
 
 <body>
- 
+    @if ($errors->any())
+    <div id="error-message" style="width: 100%; padding: 5px; height: 30px; background-color: red; color: white; text-align:center; display: flex; justify-content:center">
+    @foreach ($errors->all() as $error)
+    <ul>
+        <li>{{$error}}</li>
+    </ul>
+    @endforeach
+</div>
+@endif
+
+
+@if (Session::has('ok'))
+<div id="error-message" style="width: 100%; padding: 5px; height: 30px; background-color: #1D976C; color: white; text-align:center; display: flex; justify-content:center">
+    {{Session::get('ok')}}
+</div>
+@endif
     <div id="header" class="header">
         <div class="valign-wrapper">
             <i style="cursor: pointer" id="back" class="material-icons">keyboard_arrow_left</i>
@@ -151,6 +166,8 @@
         @endforeach
         @endif
 
+      
+
            
         </div>
         <div class="vr">&nbsp;</div>
@@ -164,11 +181,13 @@
                     </ul>
                 </div>
 
+               <form action="{{url('/payment/mpesa')}}" method="post">
+                @csrf
                 <div id="mpesa" class="col s12">
                     <div id="mpesa-action" class="row">
                         <h5 id="total-amount-text">Total Amount: <sup>KES</sup> {{Session::get('total')}}</h5>
                         <div class="input-field col s12">
-                            <input id="phone" type="tel" class="validate">
+                            <input id="phone" name="number" type="tel" class="validate">
                             <label for="phone">Phone Number</label>
                             <span class="helper-text" data-error="wrong" data-success="right">Helper text</span>
                         </div>
@@ -177,6 +196,7 @@
                         name="action">MPESA
                     </button>
                 </div>
+            </form>
 
                 <form role="form" action="{{ route('stripe.pay') }}" method="post" class="require-validation"
                     data-cc-on-file="false" data-stripe-publishable-key="{{ env('STRIPE_KEY') }}" id="payment-form">
@@ -186,7 +206,7 @@
                         <div id="stripe-action" class="row">
                             <h5 id="total-amount-text">Total Amount: <sup>KES</sup>{{Session::get('total')}}</h5>
                             <div class="input-field col s12">
-                                <input id="card_number" type="number" class="validate">
+                                <input id="card_number" type="number" class="validate" value="4242424242424242">
                                 <label for="card_number">Card Number</label>
                                 <span class="helper-text" data-error="wrong" data-success="right"> Card Number Helper
                                     text</span>
@@ -194,7 +214,7 @@
 
                             <div class="input-field col s12">
                                 <input id="card_verification_number" type="number" placeholder="For example: 123"
-                                    class="validate">
+                                    class="validate" value="123">
                                 <label for="card_verification_number">CVV</label>
                                 <span class="helper-text" data-error="wrong" data-success="right">CVV Helper text</span>
                             </div>
@@ -214,7 +234,7 @@
 
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script defer src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script defer type="text/javascript">
     $(document).ready(function () {
@@ -292,14 +312,12 @@
 
             var dateValue = $('#datepicker').val();
 
-            console.log(dateValue)
-
             if (!$form.data('cc-on-file')) {
                 e.preventDefault();
-                Stripe.setPublishableKey($form.data('stripe-publishable-key'));
+                Stripe.setPublishableKey('pk_test_51GyAEqIwxY8vQRb93CHLA08dH1623JNHnzdY99XAegyiR0mQxECl2vjgkhYGzvqtxaAJKJnvGFPqQ3kdAlK4leU300HVoUUKZo');
                 Stripe.createToken({
-                    number: $('.card_number').val(),
-                    cvc: $('.card-verification_number').val(),
+                    number: $('#card_number').val(),
+                    cvc: $('#card-verification_number').val(),
                     exp_month: 12,
                     exp_year: 2024
                 }, stripeResponseHandler);
@@ -321,6 +339,12 @@
         }
 
     });
+
+    let errorMessage = document.getElementById('error-message')
+      if(errorMessage)
+        setTimeout(() => {
+          errorMessage.style.display = "none"
+        }, 3000);
 
 
   document.getElementById('back').addEventListener('click', ()=>{

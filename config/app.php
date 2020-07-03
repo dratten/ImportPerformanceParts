@@ -162,6 +162,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Reliese\Coders\CodersServiceProvider::class,
+        SmoDav\Mpesa\Laravel\ServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -227,6 +228,10 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'STK'       => SmoDav\Mpesa\Laravel\Facades\STK::class,
+        'Simulate'  => SmoDav\Mpesa\Laravel\Facades\Simulate::class,
+        'Registrar' => SmoDav\Mpesa\Laravel\Facades\Registrar::class,
+        'Identity'  => SmoDav\Mpesa\Laravel\Facades\Identity::class,
 
     ],
 

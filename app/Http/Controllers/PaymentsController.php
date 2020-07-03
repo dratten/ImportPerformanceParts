@@ -7,6 +7,7 @@ use Stripe\Charge;
 use Stripe\Stripe;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use SmoDav\Mpesa\Laravel\Facades\STK;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use SmoDav\Mpesa\Laravel\Facades\Simulate;
@@ -22,17 +23,16 @@ class PaymentsController extends Controller
     public function payWithMpesa(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'amount' => 'required',
             'number' => 'required',
         ]);
 
         if (!$validator->fails()) {
-            $response = Simulate::request(1)
+            $response = STK::request(1)
                 ->from($request['number'])
-                ->usingReference('Import performance parts checkout')
+                ->usingReference('Import Performance Parts', 'Parts payment')
                 ->push();
             if ($response) {
-                return redirect()->back()->with('mpesa', 'The payment request was successfully received');
+                return redirect()->back()->with('ok', 'The payment request was successfully received');
             } else {
                 return redirect()->back()
                     ->withErrors(['details' => 'Unable to process payment for now please try again later']);
@@ -97,16 +97,14 @@ class PaymentsController extends Controller
 
     public function payWithCard(Request $request)
     {
-        Stripe::setApiKey(env('STRIPE_SECRET'));
+        Stripe::setApiKey('sk_test_51GyAEqIwxY8vQRb9Dc34vbuZq8Vy4ohQg8As3XGeNpW6CXkKCLkN7GNqWelL8P3OPiWAt7IqaF1b0x4rm8RUyhaO00B94wVRR9');
         Charge::create([
-            "amount" => 100 * 100,
+            "amount" => 10 * 10,
             "currency" => "usd",
             "source" => $request->stripeToken,
             "description" => "Test payment"
         ]);
 
-        Session::flash('success', 'Payment successful!');
-
-        return back();
+        return redirect()->back()->with('ok', 'The payment request was successfully received');
     }
 }

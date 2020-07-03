@@ -22,6 +22,7 @@ Route::group(["prefix"=> "payment"], function(){
     Route::get("index", "PaymentsController@index");
     Route::post('cart', 'PaymentsController@cart');
     Route::get('checkout', 'PaymentsController@checkout');
+    Route::post('mpesa', 'PaymentsController@payWithMpesa');
 });
 
 Auth::routes();
