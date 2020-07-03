@@ -126,17 +126,10 @@
 </head>
 
 <body>
-
-
-    @if (Session::has('success'))
-    <div class="payment-success">
-        <p>{{ Session::get('success') }}</p>
-    </div>
-    @endif
-
+ 
     <div id="header" class="header">
         <div class="valign-wrapper">
-            <i id="back" class="material-icons">keyboard_arrow_left</i>
+            <i style="cursor: pointer" id="back" class="material-icons">keyboard_arrow_left</i>
         </div>
         <div class="valign-wrapper">
             <h5>My Items</h5>
@@ -144,68 +137,21 @@
     </div>
     <div class="main-container">
         <div class="ordered-items">
-            <div class="checkout-item">
-                <img src="/images/partssample.jpg" width="115" height="140">
-                <div class="valign-wrapper">
-                    <div class="item-details">
-                        <p><b>Axle</b></p>
-                        <p>The axle is responsible for transferring power from the engine to the wheels. It is an
-                            important part when you want to move, brake and turn.</p>
-                        <p>Unit price: <b><sup>KES</sup>10,000</b></p>
-                    </div>
-                </div>
-            </div>
+        @if (Session::has('cart'))
+        @foreach (Session::get('cart') as $item)
+        <div class="checkout-item">
+           <img src="{{$item['image']}}" width="115" height="140">
+           <div class="valign-wrapper">
+               <div class="item-details">
+                   <p><b>{{$item['name']}}</b></p>
+                   <p>Unit price: <b><sup>KES</sup>{{$item['price']}}</b></p>
+               </div>
+           </div>
+       </div>
+        @endforeach
+        @endif
 
-            <div class="checkout-item">
-                <img src="/images/partssample.jpg" width="115" height="140">
-                <div class="item-details">
-                    <p><b>Axle</b></p>
-                    <p>The axle is responsible for transferring power from the engine to the wheels. It is an important
-                        part when you want to move, brake and turn.</p>
-                    <p>Unit price: <b><sup>KES</sup>10,000</b></p>
-                </div>
-            </div>
-
-            <div class="checkout-item">
-                <img src="/images/partssample.jpg" width="115" height="140">
-                <div class="item-details">
-                    <p><b>Axle</b></p>
-                    <p>The axle is responsible for transferring power from the engine to the wheels. It is an important
-                        part when you want to move, brake and turn.</p>
-                    <p>Unit price: <b><sup>KES</sup>10,000</b></p>
-                </div>
-            </div>
-
-
-            <div class="checkout-item">
-                <img src="/images/partssample.jpg" width="115" height="140">
-                <div class="item-details">
-                    <p><b>Axle</b></p>
-                    <p>The axle is responsible for transferring power from the engine to the wheels. It is an important
-                        part when you want to move, brake and turn.</p>
-                    <p>Unit price: <b><sup>KES</sup>10,000</b></p>
-                </div>
-            </div>
-
-            <div class="checkout-item">
-                <img src="/images/partssample.jpg" width="115" height="140">
-                <div class="item-details">
-                    <p><b>Axle</b></p>
-                    <p>The axle is responsible for transferring power from the engine to the wheels. It is an important
-                        part when you want to move, brake and turn.</p>
-                    <p>Unit price: <b><sup>KES</sup>10,000</b></p>
-                </div>
-            </div>
-
-            <div class="checkout-item">
-                <img src="/images/partssample.jpg" width="115" height="140">
-                <div class="item-details">
-                    <p><b>Axle</b></p>
-                    <p>The axle is responsible for transferring power from the engine to the wheels. It is an important
-                        part when you want to move, brake and turn.</p>
-                    <p>Unit price: <b><sup>KES</sup>10,000</b></p>
-                </div>
-            </div>
+           
         </div>
         <div class="vr">&nbsp;</div>
         <div class="checkout-options">
@@ -220,7 +166,7 @@
 
                 <div id="mpesa" class="col s12">
                     <div id="mpesa-action" class="row">
-                        <h5 id="total-amount-text">Total Amount: <sup>KES</sup> 10000</h5>
+                        <h5 id="total-amount-text">Total Amount: <sup>KES</sup> {{Session::get('total')}}</h5>
                         <div class="input-field col s12">
                             <input id="phone" type="tel" class="validate">
                             <label for="phone">Phone Number</label>
@@ -238,7 +184,7 @@
 
                     <div id="stripe" class="col s12">
                         <div id="stripe-action" class="row">
-                            <h5 id="total-amount-text">Total Amount: <sup>KES</sup> 10000</h5>
+                            <h5 id="total-amount-text">Total Amount: <sup>KES</sup>{{Session::get('total')}}</h5>
                             <div class="input-field col s12">
                                 <input id="card_number" type="number" class="validate">
                                 <label for="card_number">Card Number</label>
@@ -375,6 +321,11 @@
         }
 
     });
+
+
+  document.getElementById('back').addEventListener('click', ()=>{
+      window.history.back()
+  })
 </script>
 
 </html>

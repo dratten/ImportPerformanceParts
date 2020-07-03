@@ -57,6 +57,13 @@
     <script src="/js/price-range.js"></script>
     <script src="/js/jquery.prettyPhoto.js"></script>
     <script src="/js/main.js"></script>
+    <script>
+      let errorMessage = document.getElementById('error-message')
+      if(errorMessage)
+        setTimeout(() => {
+          errorMessage.style.display = "none"
+        }, 3000);
+    </script>
   </body>
 
 </html>
