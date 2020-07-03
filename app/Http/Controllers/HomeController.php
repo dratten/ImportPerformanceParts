@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\CarModel;
 use App\Models\Product;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -35,5 +36,12 @@ class HomeController extends Controller
       'cars' => $cars,
       'featured' => $featured
     ]);
+  }
+
+  public function search(Request $request)
+  {
+    $search = $request->get('search');
+    $products=DB::table('products')->where('product_name','like', '%' .$search . '%')->paginate(20);
+    return view('search',['products'=>$products]);
   }
 }

@@ -125,9 +125,16 @@
                     </div>
                 </div>
                 <div class="col-sm-3">
+                    <form action="/search" method="GET">
+                    <div class="input-group">
                     <div class="search_box pull-right">
-                        <input type="text" placeholder="Search" />
+                        <input type="text" name="search" class="form-control" placeholder="Search" />
+                        <span class="input-group-prepend">
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </span>
                     </div>
+                    </div>
+                </form>
                 </div>
             </div>
         </div>
