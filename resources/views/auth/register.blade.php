@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+                <div style="display: flex; justify-content:center;" class="card-header">
+                    <h4>{{ __('Register') }}</h4>
+                </div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
@@ -61,9 +63,9 @@
                             </div>
                         </div>
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                        <div class="form-group row ">
+                            <div class="col-md-4 offset-md-5 ">
+                                <button style="width: 100% !important;" type="submit" class="btn btn-primary">
                                     {{ __('Register') }}
                                 </button>
                             </div>
