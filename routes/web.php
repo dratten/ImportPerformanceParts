@@ -20,8 +20,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(["prefix"=> "payment"], function(){
     Route::get("index", "PaymentsController@index");
+    Route::post('cart', 'PaymentsController@cart');
+    Route::get('checkout', 'PaymentsController@checkout');
 });
 
 Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+Route::post('/stripe', 'PaymentsController@payWithCard')->name('stripe.pay');
 
 Route::get('/', 'HomeController@index');

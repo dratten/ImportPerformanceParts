@@ -1,6 +1,24 @@
 <header id="header">
+    
+        @if ($errors->any())
+        <div id="error-message" style="width: 100%; padding: 5px; height: 30px; background-color: red; color: white; text-align:center; display: flex; justify-content:center">
+        @foreach ($errors->all() as $error)
+        <ul>
+            <li>{{$error}}</li>
+        </ul>
+        @endforeach
+    </div>
+    @endif
+
+
+    @if (Session::has('added'))
+    <div id="error-message" style="width: 100%; padding: 5px; height: 30px; background-color: #1D976C; color: white; text-align:center; display: flex; justify-content:center">
+        {{Session::get('added')}}
+    </div>
+    @endif
+    
     <div class="header_top">
-        <!--header_top-->
+        <!--header_top--> 
         <div class="container">
             <div class="row">
                 <div class="col-sm-6">
@@ -65,7 +83,7 @@
                                 >
                             </li>
                             <li>
-                                <a href=""
+                                <a href="{{url('/payment/checkout')}}"
                                     ><i class="fa fa-shopping-cart"></i> Cart</a
                                 >
                             </li>
