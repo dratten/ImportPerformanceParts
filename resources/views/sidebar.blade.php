@@ -24,7 +24,7 @@
             <li>
               <a href="#">
                 <span class="pull-right">({{ count($cars) }})</span
-                >{{ $car->car_brand }}</a
+                >{{ $car->car_brand }} {{$car->car_model}} {{$car->car_code}}</a
               >
             </li>
           @endforeach
